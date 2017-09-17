@@ -79,7 +79,24 @@ function analyseUrl(pUrl) {
         analyseResult.fragment = pUrl.slice(pUrl.indexOf("#") + 1);
     }
 
-
-
     return analyseResult;
+}
+
+
+function findHost(pUrl){
+    let host = null;
+    
+    if (pUrl.includes(":", 7) == true) {
+        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf(":", 7));
+    } else if (pUrl.includes("/", 10)) {
+        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("/", 10));
+    } else if (pUrl.includes("?")) {
+        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("?"));
+    } else if (pUrl.includes("#")) {
+        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("#"));
+    } else {
+        host = pUrl.slice(pUrl.indexOf("//") + 2);
+    }
+    
+    return host
 }
