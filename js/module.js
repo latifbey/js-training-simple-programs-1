@@ -22,6 +22,7 @@ function analyseUrl(pUrl) {
     analyseResult.schema = findSchema(pUrl);
     analyseResult.host = findHost(pUrl);
     analyseResult.port = fincPort(pUrl);
+    analyseResult.path = findPath(pUrl);
     
 
 
@@ -88,3 +89,17 @@ function findPort(pUrl) {
     return port;
 }
 
+function findPath(pUrl){
+    let path = null;
+    if(pUrl.includes("/", 10)) {
+        if (pUrl.includes("?")) {
+            path = pUrl.slice(pUrl.indexOf("/", 10) + 1, pUrl.indexOf("?"));
+        } else if (pUrl.includes("#")) {
+            port = pUrl.slice(pUrl.indexOf("/", 10) + 1, pUrl.indexOf("#"));
+        } else {
+            port = pUrl.slice(pUrl.indexOf("/", 10) + 1);
+        }
+    }
+    
+    return path;
+}
