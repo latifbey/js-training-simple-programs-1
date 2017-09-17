@@ -21,34 +21,22 @@ function analyseUrl(pUrl) {
     // I extract to schema from the URL ... 
     analyseResult.schema = findSchema(pUrl);
     analyseResult.host = findHost(pUrl);
-    analyseResult.port = fincPort(pUrl);
+    analyseResult.port = findPort(pUrl);
     analyseResult.path = findPath(pUrl);
-    
-
-
-    /*
-    path
-    */
-
-
-
-    /* I want to find query ... all gueries start with "?" symboll... So I will start with If and i will write as condition inside "if" it is true that there is "?" inside pUrl.... and then if there is one, and then i will use "if" and 'else' ... first 'if' says that query ends with "#" and else says that query doesnt end with anything.
-     */
-    if (pUrl.includes("?")) {
-        if (pUrl.includes("#")) {
-            analyseResult.query = pUrl.slice(pUrl.indexOf("?") + 1, pUrl.indexOf("#"));
-        } else {
-            analyseResult.query = pUrl.slice(pUrl.indexOf("?") + 1);
-        }
-    }
-
-    if (pUrl.includes("#")) {
-        analyseResult.fragment = pUrl.slice(pUrl.indexOf("#") + 1);
-    }
+    analyseResult.query = findQuery(pUrl);
+    analyseResult.fragment = findFragment(pUrl);
 
     return analyseResult;
 }
 
+
+
+
+
+
+/***************************************
+********** PRIVATE FUNCTIONS ***********
+****************************************/
 
 function findSchema(pUrl) {
     return pUrl.slice(0, pUrl.indexOf("://"));
@@ -102,4 +90,26 @@ function findPath(pUrl){
     }
     
     return path;
+}
+
+function findQuery(pUrl){
+    let query = null;
+    
+    if (pUrl.includes("?")) {
+        if (pUrl.includes("#")) {
+            query = pUrl.slice(pUrl.indexOf("?") + 1, pUrl.indexOf("#"));
+        } else {
+            query = pUrl.slice(pUrl.indexOf("?") + 1);
+        }
+    }
+    
+    return query;
+}
+
+function findFragment(pUrl){
+    let fragment = null;
+    if (pUrl.includes("#")) {
+        fragment = pUrl.slice(pUrl.indexOf("#") + 1);
+    }
+    return fragment;
 }
