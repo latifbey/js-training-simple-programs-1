@@ -11,100 +11,72 @@
  * Please refer to the "https://de.wikipedia.org/wiki/Uniform_Resource_Locator"
  */
 function analyseUrl(pUrl) {
+    
+    var parts = pUrl.split("://");
+    
     return {
-        host: findHost(pUrl),
-        query: findQuery(pUrl),
-        schema: findSchema(pUrl),
-        port: findPort(pUrl),
-        path: findPath(pUrl),
-        fragment: findFragment(pUrl)
+        schema: parts[0],
+        host: findHost(parts[1]),
+        port: findPort(parts[1]),
+        query: findQuery(parts[1]),
+        path: findPath(parts[1]),
+        fragment: findFragment(parts[1]),
     };
 }
-
-
-
-
 
 
 /***************************************
 ********** PRIVATE FUNCTIONS ***********
 ****************************************/
 
+// Use Data Structures
+
 let urlMetaData = [":", "/", "?", "#"];
 
-
-function findSchema(pUrl) {
-    return pUrl.slice(0, pUrl.indexOf("://"));
-}
 
 function findHost(pUrl) {
     let host = null;
 
-    if (pUrl.includes(":", 7) == true) {
-        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf(":", 7));
+    if (pUrl.includes(":") == true) {
+        host = pUrl.slice(0, pUrl.indexOf(":", 10));
     } else if (pUrl.includes("/", 10)) {
-        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("/", 10));
+        host = pUrl.slice(0, pUrl.indexOf("/", 10));
     } else if (pUrl.includes("?")) {
-        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("?"));
+        host = pUrl.slice(0, pUrl.indexOf("?"));
     } else if (pUrl.includes("#")) {
-        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("#"));
+        host = pUrl.slice(0, pUrl.indexOf("#"));
     } else {
-        host = pUrl.slice(pUrl.indexOf("//") + 2);
+        host = pUrl.slice(0);
     }
 
     return host;
 }
 
-function findPort(pUrl) {
-    let port = null;
-    if (pUrl.includes(":", 10)) {
-        if (pUrl.includes("/", 10)) {
-            port = pUrl.slice(pUrl.indexOf(":", 10) + 1, pUrl.indexOf("/", 10));
-        } else if (pUrl.includes("?")) {
-            port = pUrl.slice(pUrl.indexOf(":", 10) + 1, pUrl.indexOf("?"));
-        } else if (pUrl.includes("#")) {
-            port = pUrl.slice(pUrl.indexOf(":", 10) + 1, pUrl.indexOf("#"));
-        } else {
-            port = pUrl.slice(pUrl.indexOf(":", 10) + 1);
-        }
-    }
-    
-    return port;
+function findPort(pUrl){
+    return parse(":", pUrl);
 }
 
 function findPath(pUrl){
-    let path = null;
-    if(pUrl.includes("/", 10)) {
-        if (pUrl.includes("?")) {
-            path = pUrl.slice(pUrl.indexOf("/", 10) + 1, pUrl.indexOf("?"));
-        } else if (pUrl.includes("#")) {
-            port = pUrl.slice(pUrl.indexOf("/", 10) + 1, pUrl.indexOf("#"));
-        } else {
-            port = pUrl.slice(pUrl.indexOf("/", 10) + 1);
-        }
-    }
-    
-    return path;
+    return parse("/", pUrl);
 }
 
 function findQuery(pUrl){
-    let query = null;
-    
-    if (pUrl.includes("?")) {
-        if (pUrl.includes("#")) {
-            query = pUrl.slice(pUrl.indexOf("?") + 1, pUrl.indexOf("#"));
-        } else {
-            query = pUrl.slice(pUrl.indexOf("?") + 1);
-        }
-    }
-    
-    return query;
+    return parse("?", pUrl);
 }
 
 function findFragment(pUrl){
-    let fragment = null;
-    if (pUrl.includes("#")) {
-        fragment = pUrl.slice(pUrl.indexOf("#") + 1);
+    return parse("#", pUrl);
+}
+
+function parse(pChar, pUrl){
+    let parsedElement = null;
+    if(pUrl.includes(pChar)){
+        for(let i=urlMetaData.indexOf(pChar)+1; i<urlMetaData.length; i++){
+            if (pUrl.includes(urlMetaData[i])) {
+                return pUrl.slice(pUrl.indexOf(pChar) + 1, pUrl.indexOf(urlMetaData[i]));
+            }
+        }
+        
+        return pUrl.slice(pUrl.indexOf(pChar) + 1);
     }
-    return fragment;
 }
