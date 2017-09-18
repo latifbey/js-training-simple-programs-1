@@ -11,24 +11,14 @@
  * Please refer to the "https://de.wikipedia.org/wiki/Uniform_Resource_Locator"
  */
 function analyseUrl(pUrl) {
-    let analyseResult = {
-        host: null,
-        query: null,
-        schema: null,
-        port: null,
-        path: null,
-        fragment: null
-    }
-
-    // I extract to schema from the URL ... 
-    analyseResult.schema = findSchema(pUrl);
-    analyseResult.host = findHost(pUrl);
-    analyseResult.port = findPort(pUrl);
-    analyseResult.path = findPath(pUrl);
-    analyseResult.query = findQuery(pUrl);
-    analyseResult.fragment = findFragment(pUrl);
-
-    return analyseResult;
+    return {
+        host: findHost(pUrl),
+        query: findQuery(pUrl),
+        schema: findSchema(pUrl),
+        port: findPort(pUrl),
+        path: findPath(pUrl),
+        fragment: findFragment(pUrl)
+    };
 }
 
 
@@ -39,6 +29,9 @@ function analyseUrl(pUrl) {
 /***************************************
 ********** PRIVATE FUNCTIONS ***********
 ****************************************/
+
+let urlMetaData = [":", "/", "?", "#"];
+
 
 function findSchema(pUrl) {
     return pUrl.slice(0, pUrl.indexOf("://"));

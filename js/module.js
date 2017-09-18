@@ -47,8 +47,8 @@ function findSchema(pUrl) {
 function findHost(pUrl) {
     let host = null;
 
-    if (pUrl.includes(":", 7) == true) {
-        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf(":", 7));
+    if (pUrl.includes(":", 10) == true) {
+        host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf(":", 10));
     } else if (pUrl.includes("/", 10)) {
         host = pUrl.slice(pUrl.indexOf("//") + 2, pUrl.indexOf("/", 10));
     } else if (pUrl.includes("?")) {
