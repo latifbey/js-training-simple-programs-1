@@ -32,12 +32,34 @@ describe('Test Suite - Test your own functions with edge cases', () => {
     it('Find polindrom words in sentence 1', function(){
         let words = findPalindroms('Nerdesin kacak? Neden gelmedin ama?');
 
-        words.query.should.be.deepEqual(['kacak', 'neden', 'ama']);
+        words.should.be.deepEqual(['kacak', 'neden', 'ama']);
     });
     
     it('Find polindrom words in sentence 2', function(){
         let words = findPalindroms('The radar can refer a level.');
 
-        words.query.should.be.deepEqual(['radar', 'refer', 'level']);
+        words.should.be.deepEqual(['radar', 'refer', 'level']);
+    });
+});
+
+
+
+
+
+
+describe('Test Suite - Test your own functions with edge cases', () => {
+    it('Find the greatest common divisor 1', function(){
+        let gcd = findGcd(9, 6);
+        gcd.should.be.equal(3);
+    });
+
+    it('Find the greatest common divisor 2', function(){
+        let gcd = findGcd(12, 16);
+        gcd.should.be.equal(4);
+    });
+    
+    it('Find the greatest common divisor 3', function(){
+        let gcd = findGcd(21, 22);
+        gcd.should.be.equal(1);
     });
 });
