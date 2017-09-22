@@ -36,8 +36,8 @@ describe('Test Suite - Test your own functions with edge cases', () => {
     });
     
     it('Find polindrom words in sentence 2', function(){
-        let words = findPalindroms('Nerdesin kacak? Neden gelmedin ama?');
+        let words = findPalindroms('The radar can refer a level.');
 
-        words.query.should.be.deepEqual(['kacak', 'neden', 'ama']);
+        words.query.should.be.deepEqual(['radar', 'refer', 'level']);
     });
 });
