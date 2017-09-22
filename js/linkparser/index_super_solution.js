@@ -12,7 +12,7 @@
  */
 function analyseUrl(pUrl) {
     //let regExp = new RegExp();
-    aaaa="http://www.somesite.se/blah/sdgsdgsdgs";
+    let aaaa="http://www.somesite.se/blah/sdgsdgsdgs";
     //aaaa="http://somesite.se/blah/sese";
         var matches = aaaa.match(/:\/\/(?:www\.)?(.[^/]+)(.*)/);
         alert(matches[1]);
