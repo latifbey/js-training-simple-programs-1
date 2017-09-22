@@ -25,3 +25,20 @@ describe('Test Suite - Test your own functions with edge cases', () => {
         analysis.query.should.be.equal('sort=ASC');
     });
 });
+
+
+
+
+
+describe('Test Suite - Test your own functions with edge cases', () => {
+
+    it('An url will be parsed an return all the parts in an object.', function(){
+        let analysis = analyseUrl('https://it-club-oberland.ch#section');
+
+        analysis.schema.should.be.equal('https');
+        analysis.host.should.be.equal('it-club-oberland.ch');
+        analysis.fragment.should.be.equal('section');
+    });
+
+
+});
