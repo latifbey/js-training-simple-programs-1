@@ -12,3 +12,8 @@
     console.log("PATH:", urlObject.path)
     console.log("QUERY:", urlObject.query)
 }
+
+
+{
+    
+}
