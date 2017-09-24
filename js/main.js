@@ -14,7 +14,7 @@
 })();
 
 
-(function() => {
+(function() {
     let palindroms = findPalindroms("merhaba dostlar ses verin de karpuz kesek");
     console.log(palindroms);
 })();
@@ -22,11 +22,9 @@
 
 (function(){
     let gcd = findGcd(9, 27);
-    console.log(9);
 })();
 
 
 (() => {
     let gcd = findGcd(9, 27);
-    console.log(9);
 })();
